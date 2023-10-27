@@ -17,7 +17,10 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const dbConnection = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const url = process.env.MONGODB_CNN || '';
-        yield mongoose_1.default.connect(url);
+        yield mongoose_1.default.connect(url, {
+            serverSelectionTimeoutMS: 5000,
+            family: 4,
+        });
         console.log('Base de datos online');
     }
     catch (error) {
