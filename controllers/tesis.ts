@@ -165,6 +165,8 @@ export const getCSV = async(req: Request, res: Response) => {
         });
     });
 
+    console.log(record);
+
     // Escribe los datos en el archivo CSV
     csvWriter.writeRecords(record)
     .then(() => {

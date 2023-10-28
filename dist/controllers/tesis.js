@@ -95,6 +95,16 @@ const getCSV = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             { id: 'p28', title: 'PIL28' },
             { id: 'p29', title: 'PIL29' },
             { id: 'p210', title: 'PIL210' },
+            { id: 'p211', title: 'PIL211' },
+            { id: 'p212', title: 'PIL212' },
+            { id: 'p213', title: 'PIL213' },
+            { id: 'p214', title: 'PIL214' },
+            { id: 'p215', title: 'PIL215' },
+            { id: 'p216', title: 'PIL216' },
+            { id: 'p217', title: 'PIL217' },
+            { id: 'p218', title: 'PIL218' },
+            { id: 'p219', title: 'PIL219' },
+            { id: 'p220', title: 'PIL220' },
         ],
         fieldDelimiter: ',',
         encoding: 'utf8'
@@ -154,8 +164,19 @@ const getCSV = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             p28: tesis.get('data.37.value'),
             p29: tesis.get('data.38.value'),
             p210: tesis.get('data.39.value'),
+            p211: tesis.get('data.40.value'),
+            p212: tesis.get('data.41.value'),
+            p213: tesis.get('data.42.value'),
+            p214: tesis.get('data.43.value'),
+            p215: tesis.get('data.44.value'),
+            p216: tesis.get('data.45.value'),
+            p217: tesis.get('data.46.value'),
+            p218: tesis.get('data.47.value'),
+            p219: tesis.get('data.48.value'),
+            p220: tesis.get('data.49.value'),
         });
     });
+    console.log(record);
     // Escribe los datos en el archivo CSV
     csvWriter.writeRecords(record)
         .then(() => {
