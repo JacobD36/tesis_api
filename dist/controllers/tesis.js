@@ -201,7 +201,6 @@ const getCSV = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             p220: tesis.get('data.49.value'),
         });
     });
-    console.log(record);
     // Escribe los datos en el archivo CSV
     csvWriter.writeRecords(record)
         .then(() => {
