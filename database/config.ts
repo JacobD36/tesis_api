@@ -2,8 +2,7 @@ import mongoose from 'mongoose';
 
 export const dbConnection = async() => {
     try {
-        //const url = process.env.MONGODB_CNN || '';
-        const url = 'mongodb://crmUser:kbjnfqfsfy79@127.0.0.1:27017/tesis?authSource=admin';
+        const url = process.env.MONGODB_CNN || '';
         await mongoose.connect(url ,{
             serverSelectionTimeoutMS: 5000,
             family: 4,
