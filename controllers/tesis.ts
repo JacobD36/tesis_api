@@ -16,6 +16,25 @@ export const postTesis = async(req: Request, res: Response) => {
 }
 
 /**
+ * Actualiza el correo electrónico del usuario que realizó la encuesta
+ * @param { Request } req 
+ * @param { Response } res 
+ */
+export const putTesis = async(req: Request, res: Response) => {
+    const { id, email, auth } = req.body;
+    const tesis = await Tesis.findById(id);
+    if (!tesis) {
+        return res.status(404).json({
+            msg: 'No existe un cuestionario con ese id'
+        });
+    }
+    tesis.set('user.email', email);
+    tesis.set('user.auth', auth);
+    await tesis.save();
+    res.json(tesis);
+}
+
+/**
  * Genera un CSV con toda la data y la exporta
  * @param { Request }req 
  * @param { Response } res 
@@ -42,6 +61,8 @@ export const getCSV = async(req: Request, res: Response) => {
             { id: 'dependencia', title: 'DEPENDENCIA' },
             { id: 'grado_padre', title: 'GRADO PADRE' },
             { id: 'grado_madre', title: 'GRADO MADRE' },
+            { id: 'email', title: 'CORREO'},
+            { id: 'auth', title: 'AUTORIZA ENVIO'},
             { id: 'p11', title: 'GB11' },
             { id: 'p12', title: 'GB12' },
             { id: 'p13', title: 'GB13' },
@@ -112,6 +133,8 @@ export const getCSV = async(req: Request, res: Response) => {
             dependencia: tesis.get('user.dependencia'),
             grado_padre: tesis.get('user.grado_padre'),
             grado_madre: tesis.get('user.grado_madre'),
+            email: tesis.get('user.email'),
+            auth: tesis.get('user.auth') === true ? 'SI' : 'NO',
             p11: tesis.get('data.0.value'),
             p12: tesis.get('data.1.value'),
             p13: tesis.get('data.2.value'),
@@ -164,8 +187,6 @@ export const getCSV = async(req: Request, res: Response) => {
             p220: tesis.get('data.49.value'),
         });
     });
-
-    console.log(record);
 
     // Escribe los datos en el archivo CSV
     csvWriter.writeRecords(record)

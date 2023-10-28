@@ -60,6 +60,14 @@ const TesisSchema = new mongoose_1.Schema({
         grado_madre: {
             type: String,
             uppercase: true
+        },
+        email: {
+            type: String,
+            default: ''
+        },
+        auth: {
+            type: Boolean,
+            default: false
         }
     },
     data: [
@@ -74,7 +82,11 @@ const TesisSchema = new mongoose_1.Schema({
                 type: Number
             }
         }
-    ]
+    ],
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 });
 TesisSchema.methods.toJSON = function () {
     const _a = this.toObject(), { __v, _id } = _a, tesis = __rest(_a, ["__v", "_id"]);

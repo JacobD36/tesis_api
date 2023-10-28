@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getCSV = exports.postTesis = void 0;
+exports.getCSV = exports.putTesis = exports.postTesis = void 0;
 const tesis_1 = __importDefault(require("../models/tesis"));
 const csv_writer_1 = require("csv-writer");
 const fs_1 = __importDefault(require("fs"));
@@ -28,6 +28,25 @@ const postTesis = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.json(tesis);
 });
 exports.postTesis = postTesis;
+/**
+ * Actualiza el correo electrónico del usuario que realizó la encuesta
+ * @param { Request } req
+ * @param { Response } res
+ */
+const putTesis = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id, email, auth } = req.body;
+    const tesis = yield tesis_1.default.findById(id);
+    if (!tesis) {
+        return res.status(404).json({
+            msg: 'No existe un cuestionario con ese id'
+        });
+    }
+    tesis.set('user.email', email);
+    tesis.set('user.auth', auth);
+    yield tesis.save();
+    res.json(tesis);
+});
+exports.putTesis = putTesis;
 /**
  * Genera un CSV con toda la data y la exporta
  * @param { Request }req
@@ -55,6 +74,8 @@ const getCSV = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             { id: 'dependencia', title: 'DEPENDENCIA' },
             { id: 'grado_padre', title: 'GRADO PADRE' },
             { id: 'grado_madre', title: 'GRADO MADRE' },
+            { id: 'email', title: 'CORREO' },
+            { id: 'auth', title: 'AUTORIZA ENVIO' },
             { id: 'p11', title: 'GB11' },
             { id: 'p12', title: 'GB12' },
             { id: 'p13', title: 'GB13' },
@@ -124,6 +145,8 @@ const getCSV = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             dependencia: tesis.get('user.dependencia'),
             grado_padre: tesis.get('user.grado_padre'),
             grado_madre: tesis.get('user.grado_madre'),
+            email: tesis.get('user.email'),
+            auth: tesis.get('user.auth') === true ? 'SI' : 'NO',
             p11: tesis.get('data.0.value'),
             p12: tesis.get('data.1.value'),
             p13: tesis.get('data.2.value'),
@@ -176,7 +199,6 @@ const getCSV = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             p220: tesis.get('data.49.value'),
         });
     });
-    console.log(record);
     // Escribe los datos en el archivo CSV
     csvWriter.writeRecords(record)
         .then(() => {
