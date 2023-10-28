@@ -16,8 +16,7 @@ exports.dbConnection = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const dbConnection = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        //const url = process.env.MONGODB_CNN || '';
-        const url = 'mongodb://crmUser:kbjnfqfsfy79@127.0.0.1:27017/tesis?authSource=admin';
+        const url = process.env.MONGODB_CNN || '';
         yield mongoose_1.default.connect(url, {
             serverSelectionTimeoutMS: 5000,
             family: 4,
