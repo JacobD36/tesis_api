@@ -136,7 +136,7 @@ export const getCSV = async(req: Request, res: Response) => {
             grado_madre: tesis.get('user.grado_madre'),
             email: tesis.get('user.email'),
             auth: tesis.get('user.auth') === true ? 'SI' : 'NO',
-            created_at: tesis.get('created_at'),
+            created_at: tesis.get('createdAt').toLocaleString('es-PE', { timeZone: 'America/Lima' }),
             p11: tesis.get('data.0.value'),
             p12: tesis.get('data.1.value'),
             p13: tesis.get('data.2.value'),
