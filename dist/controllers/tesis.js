@@ -76,6 +76,7 @@ const getCSV = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             { id: 'grado_madre', title: 'GRADO MADRE' },
             { id: 'email', title: 'CORREO' },
             { id: 'auth', title: 'AUTORIZA ENVIO' },
+            { id: 'created_at', title: 'FECHA DE CREACIÓN' },
             { id: 'p11', title: 'GB11' },
             { id: 'p12', title: 'GB12' },
             { id: 'p13', title: 'GB13' },
@@ -147,6 +148,7 @@ const getCSV = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             grado_madre: tesis.get('user.grado_madre'),
             email: tesis.get('user.email'),
             auth: tesis.get('user.auth') === true ? 'SI' : 'NO',
+            created_at: tesis.get('createdAt').toLocaleString('es-PE', { timeZone: 'America/Lima' }),
             p11: tesis.get('data.0.value'),
             p12: tesis.get('data.1.value'),
             p13: tesis.get('data.2.value'),
@@ -199,6 +201,7 @@ const getCSV = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             p220: tesis.get('data.49.value'),
         });
     });
+    console.log(record);
     // Escribe los datos en el archivo CSV
     csvWriter.writeRecords(record)
         .then(() => {
