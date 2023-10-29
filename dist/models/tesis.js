@@ -45,6 +45,9 @@ const TesisSchema = new mongoose_1.Schema({
         hijos: {
             type: Number,
         },
+        esta_laborando: {
+            type: Boolean,
+        },
         puesto: {
             type: String,
             uppercase: true
