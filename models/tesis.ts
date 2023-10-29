@@ -34,7 +34,7 @@ const TesisSchema = new Schema({
             type: Number,
         },
         esta_laborando: {
-            type: Boolean,
+            type: String,
         },
         puesto: {
             type: String,

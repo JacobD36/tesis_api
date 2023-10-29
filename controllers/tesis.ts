@@ -131,7 +131,7 @@ export const getCSV = async(req: Request, res: Response) => {
             ciclo: tesis.get('user.ciclo'),
             tiene_hijos: tesis.get('user.tiene_hijos'),
             hijos: tesis.get('user.hijos'),
-            esta_laborando: tesis.get('user.esta_laborando') ? 'SI' : 'NO',
+            esta_laborando: tesis.get('user.esta_laborando'),
             puesto: tesis.get('user.puesto'),
             dependencia: tesis.get('user.dependencia'),
             grado_padre: tesis.get('user.grado_padre'),

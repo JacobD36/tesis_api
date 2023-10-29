@@ -46,7 +46,7 @@ const TesisSchema = new mongoose_1.Schema({
             type: Number,
         },
         esta_laborando: {
-            type: Boolean,
+            type: String,
         },
         puesto: {
             type: String,
