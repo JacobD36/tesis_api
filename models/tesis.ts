@@ -33,6 +33,9 @@ const TesisSchema = new Schema({
         hijos: {
             type: Number,
         },
+        esta_laborando: {
+            type: Boolean,
+        },
         puesto: {
             type: String,
             uppercase: true
